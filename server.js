@@ -3,7 +3,10 @@ var Msg = '';
 var WebSocketServer = require('ws').Server;
 var escape = require('escape-html');
 var fs = require('fs');
-var  wss = new WebSocketServer({port: 8010});
+var wss = new WebSocketServer({port: 8010});
+var sqlite = require('sqlite3').verbose();
+var dbfile = 'database_mmo.db';
+var db = new sqlite.Database(dbfile);
 
 var connections = [];
 
@@ -34,3 +37,10 @@ wss.on('connection', function(ws) {
 		connections.splice(index, 1);
 	});
 });
+
+function loadOnStart() {
+	db.serialize(function() {
+		
+	
+	});
+}
