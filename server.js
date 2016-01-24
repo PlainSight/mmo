@@ -1,11 +1,10 @@
 console.log("Server started");
-var Msg = '';
+
 var WebSocketServer = require('ws').Server;
 var escape = require('escape-html');
 var fs = require('fs');
 var wss = new WebSocketServer({port: 8010});
 var db = require('./database');
-
 
 var connections = [];
 
@@ -18,15 +17,12 @@ function broadcast(message) {
 wss.on('connection', function(ws) {
 	console.log('new connection');
 	connections.push(ws);
-        ws.on('message', function(message) {
-        	console.log('Received from client: %s', message);
-        	if(message === 'ping') {
+  ws.on('message', function(message) {
+  	console.log('Received from client: %s', message);
+  	if(message === 'ping') {
 			ws.send('pong:' + connections.length);
 		} else {
-			fs.appendFile('/root/industries/potato.txt', message);
-			fs.readFile('/root/industries/potato.txt', function(err, data) {
-				fs.writeFile('/root/industries/potato.html', '<html><body>' + data + '</body></html>');
-			});
+			db.createUserAccount('bobby', 'hunter6');
 			broadcast(escape(message));
 		}
 	});

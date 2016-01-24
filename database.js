@@ -2,49 +2,53 @@ var sqlite = require('sqlite3').verbose();
 var dbfile = 'database_mmo.db';
 var db = new sqlite.Database(dbfile);
 
-function getAllChunks() {
+exports.getAllChunks = function () {
 
 
 
 }
 
-function createUserAccount(name, password) {
+exports.createUserAccount = function(name, password) {
 	db.serialize(function() {
 	  db.get("SELECT * FROM users WHERE name = ?", [name], function(err, user) {
+
+	  		console.log(err);
+	  		console.log(user);
 
 	  	if(user) {
 	  		return false;
 	  	} else {
-	  		var stmt = db.run("INSERT INTO lorem VALUES (?, ?, -1)", [name, password], function(err, res) {
-	  			return !err;
+	  		db.run("INSERT INTO users VALUES (?, ?, -1)", [name, password], function(err2, res) {
+  				console.log(err2);
+  				console.log(res);
+  				return !err;
 	  		});
 	  	}
 
 	  });
 
 	});
-	db.close();
 }
 
-function getUser() {
-
-
-
-}
-
-function saveChunk() {
+exports.getUser = function() {
 
 
 
 }
 
-function saveEvents() {
+exports.saveChunk = function() {
 
 
 
 }
 
-function saveUser(user) {
+exports.saveEvents = function() {
+
+
+
+}
+
+exports.saveUser = function(user) {
 
 
 
