@@ -4,9 +4,8 @@ var WebSocketServer = require('ws').Server;
 var escape = require('escape-html');
 var fs = require('fs');
 var wss = new WebSocketServer({port: 8010});
-var sqlite = require('sqlite3').verbose();
-var dbfile = 'database_mmo.db';
-var db = new sqlite.Database(dbfile);
+var db = require('./database');
+
 
 var connections = [];
 
