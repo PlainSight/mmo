@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"ws": "latest",
+		"escape-html": "latest"
+	}
+}
